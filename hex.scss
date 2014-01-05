@@ -1,0 +1,107 @@
+//
+//  *** HEXAGON CSS GRID ***
+//
+//  Based on Chronos template by Br0
+//    http://themeforest.net/item/chronos-one-page-responsive-template/5704944?WT.ac=solid_search_thumb&WT.seg_1=solid_search_thumb&WT.z_author=Br0
+//
+//  Using Animate.css
+//    https://daneden.me/animate/
+//
+
+
+@import "compass/css3";
+
+$hex-color-background: #6A6A62;
+$hex-color-background-hover: #B6BBB5;
+$hex-color-title: #6A6A62;
+$hex-grid-container-width: 960px; // Bootstrap 3 .container inner width
+$hex-grid-row-items: 4; // Items per row
+$hex-grid-margin: 5px; // Margin between items
+
+$hex-width: ($hex-grid-container-width - ( ($hex-grid-margin * 2) * $hex-grid-row-items ) ) / $hex-grid-row-items;
+$hex-height: $hex-width * 2;
+
+.hexagon {
+  position: relative;
+  overflow: hidden;
+  visibility: hidden;
+  @include transform(rotate(120deg));
+  cursor: pointer;
+  width: $hex-width; // 240px;
+  height: $hex-height; // 480px;
+  margin: -($hex-width / 2 + $hex-grid-margin * 2) $hex-grid-margin; //-132px 4px;
+
+  .hexagon-in1 {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    @include transform(rotate(-60deg));
+
+    .hexagon-in2 {
+      width: 100%;
+      height: 100%;
+      background-repeat: no-repeat;
+      background-position: 50%;
+      background-color: $hex-color-background;
+      visibility: visible;
+      @include transform(rotate(-60deg));
+      position: relative;
+      overflow: hidden;
+      h1, h2, h3, h4, h5 {
+        font-family: 'chunkfiveroman';
+        color: $hex-color-title;
+      }
+      .border-box {
+        border-bottom-color: $hex-color-title;
+      }
+      > img{
+        position: absolute;
+        left: 0;
+        top: ($hex-height - ($hex-width * 1.1739)) / 2; //100px;
+        height: $hex-width * 1.1739; //280px;
+        z-index: 1;
+        &.fx{
+          @include transition-property(opacity);
+          @include transition-duration(0.5s);
+        }
+      }
+    }
+  }
+
+  // Only used to animated items on start up
+  &.animated{
+    img {
+      @include opacity(0);
+    }
+  }
+
+  &:first-child {
+    margin-left: ($hex-width / 2 + $hex-grid-margin * 2);// 128px;
+  }
+
+  &:hover .hover-effect {
+    left: 0;
+  }
+}
+
+
+.hover-effect {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 100%;
+  z-index: 5;
+  display: table;
+  vertical-align: middle;
+  transition: 0.3s;
+  background-color: rgba($hex-color-background-hover, 0.9);
+
+  .table-row .table-cell .border-bottom-white {
+    width: 60%;
+  }
+
+  .text-caption {
+    font-size: 18px;
+  }
+}
